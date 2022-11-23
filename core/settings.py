@@ -76,16 +76,20 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'staticfiles')
+]
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
-STATICFILES_DIRS = [ 
-    BASE_DIR / 'static'
-]
+# STATICFILES_DIRS = [ 
+#     BASE_DIR / 'static'
+# ]
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
