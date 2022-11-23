@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-9obzjwa_=c2qym9bchib31iz!w9vun-w0_305z45-5ad1u^ezi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 ROOT_URLCONF = 'core.urls'
 
 # Application definition
@@ -40,11 +40,14 @@ INSTALLED_APPS = [
     'users',
     'pages',
     'crispy_forms',
-    'movies'
+    'movies',
+    'corsheaders'
     
 ]
+CORS_ALLOW_ALL_ORIGINS = True
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
