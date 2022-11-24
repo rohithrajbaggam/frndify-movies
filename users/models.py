@@ -20,6 +20,11 @@ class UserProfile(models.Model):
     State       = models.CharField(choices=state_choices,max_length=255, null=True, blank=True)
     Country     = models.CharField(max_length=20, default='India')
 
+    movie_interest_1 = models.CharField(max_length=100, blank=True, null=True) 
+    movie_interest_2 = models.CharField(max_length=100, blank=True, null=True) 
+    movie_interest_3 = models.CharField(max_length=100, blank=True, null=True) 
+    movie_interest_4 = models.CharField(max_length=100, blank=True, null=True) 
+
     whatsapp    = models.CharField(max_length=10, blank=True) 
     instagram_username = models.CharField(max_length=50 ,blank = True)
     facebook    = models.URLField(blank = True)

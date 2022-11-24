@@ -44,15 +44,15 @@
           <p style="color:aliceblue;">{{ data.Type }}</p></a>
       </div>
  
-        <div class="bookmark">
+        {% comment %} <div class="bookmark">
           {% if user.is_authenticated %}
-          {% if post.pk in user_save_post_list %}
-          <a href="" class="btn btn-danger"><img src="{%static 'logo/unbookmark.png'%}" alt="" style="height: 20px; width: 20px; float: right;"></a>
+          {% if data.imdbid  in user_save_movie_list %}
+          <a href="{% url 'userMovieSaveView' imdbid=data.imdbid link=data.link %}" class="btn btn-danger"><img src="{%static 'logo/unbookmark.png'%}" alt="" style="height: 20px; width: 20px; float: right;"></a>
           {% else %}
-          <a href="" class="btn btn-outline-info"><img src="{%static 'logo/bookmark.png'%}" alt="" style="height: 20px; width: 20px; float: right;"></a>
+          <a href="{% url 'userMovieUnSaveView' imdbid=data.imdbid %}" class="btn btn-outline-info"><img src="{%static 'logo/bookmark.png'%}" alt="" style="height: 20px; width: 20px; float: right;"></a>
           {% endif %}
           {% endif %}
-        </div>
+        </div> {% endcomment %}
     </div>  
     <br><br>
 </div>

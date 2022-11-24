@@ -22,12 +22,12 @@
         <li>
             <a href="{% url 'home' %}" class="active">Home</a>
         </li>
-        <li>
+        {% comment %} <li>
             <a href="{% url 'page-list' %}" class="active">Pages</a>
         </li>
         <li>
             <a href="{% url 'post-list' %}" class="active">Page Posts</a>
-        </li>
+        </li> {% endcomment %}
         <li>
             <a href="{% url 'user-post-list' %}" class="active">User Posts</a>
         </li>

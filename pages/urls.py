@@ -9,7 +9,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('apilist/', views.apilistview, name='api-list'),
     path('help/', views.help, name='help'),
-    path('search/', views.search, name='search'),
+    # path('search/', views.search, name='search'),
     path('userprofiledata', views.userprofilelist, name='user-profile-list'),
     path('userprofiledata/<int:pk>/', views.userprofiledatadetail, name='user-profile-detail'),
     # page urls
