@@ -3,6 +3,8 @@ import requests
 from .models import SaveAPITokenModel, userSearchHistoryModel, userMovieSaveModel
 from django.http import HttpResponse
 from .utils import get_home_page_content 
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 # {'Title': 'Lucy', 
 # 'Year': '2014', 
@@ -10,13 +12,16 @@ from .utils import get_home_page_content
 #  'Type': 'movie', 
 # 'Poster': 'https://m.media-amazon.com/images/M/MV5BODcxMzY3ODY1NF5BMl5BanBnXkFtZTgwNzg1NDY4MTE@._V1_SX300.jpg'}
 session = requests.Session()
+
+@login_required(login_url='login')
 def home(request):
     try:
         # ?s=lucy&page=1&apikey=e1683ba0
         # user_save_post_list = user_save_post.values_list('post', flat=True)
         api_key = SaveAPITokenModel.objects.filter(is_active=True).last()
         params = {
-            "s" : get_home_page_content(),
+            "s" : "batman",
+            # "s" : get_home_page_content(),
             "page" : 1,
             "apikey" : api_key.api_key,
             
@@ -31,7 +36,7 @@ def home(request):
         return render(request, 'movies/homescreen.html', context)
     except:
         return HttpResponse("Internal Server Error")
-
+@login_required(login_url='login')
 def userMovieSaveView(request, link, imdbid):
     try:
         if userMovieSaveModel.objects.filter(imdbid=imdbid, user=request.user).exists():
@@ -50,7 +55,7 @@ def userMovieSaveView(request, link, imdbid):
     except:
         return redirect("home")
 
-
+@login_required(login_url='login')
 def userMovieUnSaveView(request, imdbid):
     try:
         query = userMovieSaveModel.objects.get(
@@ -62,7 +67,8 @@ def userMovieUnSaveView(request, imdbid):
         return redirect("home")
     except:
         return redirect("home")
-        
+
+@login_required(login_url='login')
 def suggestionsView(request, name):
     # ?s=lucy&page=1&apikey=e1683ba0
     try:
@@ -92,7 +98,7 @@ def suggestionsView(request, name):
 
 
 
-
+@login_required(login_url='login')
 def search(request):
     try:
         keyword = ''
@@ -153,4 +159,10 @@ def search(request):
                 }
         return render(request, 'movies/search.html', context)
 
-
+@login_required(login_url='login')
+def userBrowsingHistory(request):
+    user_history = userSearchHistoryModel.objects.filter(user=request.user).order_by("-timestamp")
+    context = {
+        'req_data' : user_history
+    }
+    return render(request, "movies/history.html", context)

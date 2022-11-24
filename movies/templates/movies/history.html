@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{%load static %}
+{% block css_content %} 
+<link rel="stylesheet" href="{%static 'styles/post.css'%}">
+{% endblock %}
+
+{%block body_content%} 
+{% for data in req_data %}
+<div class="feed" style="background-color: rgb(23, 2, 48); "> 
+    <div class="head">
+        <div class="user">
+          <a href="">
+            <div class="profile-photo">
+             
+                <img src="">
+            </div>   <h3>{{ data.user.username }}</h3>
+            <div class="ingo" style="float: right;">
+                 <p style="color:aliceblue;">{{ data.timestamp|timesince }}</p></a></a>
+            </div>
+        </div>
+        <span class="edit">
+           <i class="uil uil-ellipsis-h"></i>
+        </span>
+    </div>
+    
+    {% if data.url %}
+    <div class="photo">
+       <h4>{{data.url}}</h4>
+    </div>
+    {%endif%}
+        <br>
+        <h1 style="color:aliceblue;" ><b>Search Keyword {{ data.search_keyword }}</b></h1>
+        <br>
+        <h4 style="color:aliceblue;" ><b>APIKEY USED #{{ data.api_key }}</b></h2>
+        </a>
+
+
+    <div class="action-buttons">
+        <div class="interaction-buttons">
+            <span><i class="uil uil-heart"></i></span>
+            <span><i class="uil uil-comment-dots"></i></span>
+            <span><i class="uil uil-share-alt"></i></span>
+        </div>
+        <div class="caption">
+          <a href="">
+          <p style="color:aliceblue;">{{ data.Type }}</p></a>
+      </div>
+ 
+        
+    </div>  
+    <br><br>
+</div>
+{% comment %} <div>
+    <h1>title : {{data.Title}}</h1>
+    
+</div> {% endcomment %}
+{% endfor %}
+{% comment %} {% include 'pages/components/page_post_compo.html' %}
+{% if user.is_authenticated %}
+{% include 'pages/components/user_post_compo.html' %}
+{% endif %} {% endcomment %}
+
+{% endblock %} 
